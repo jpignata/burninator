@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/jpignata/burninator.png)](https://codeclimate.com/github/jpignata/burninator)
 [![Gem Version](https://badge.fury.io/rb/burninator.png)](http://badge.fury.io/rb/burninator)
 
-### Status: Alpha (Don't use in production)
+### Status: Beta (Caveat Utilitor)
 
 ## Summary
 
