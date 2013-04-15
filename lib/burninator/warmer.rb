@@ -18,12 +18,11 @@ class Burninator
     private
 
     def process(event)
-      query = event[:sql]
+      query = event[:sql].squish
       binds = event[:binds]
 
       @connection.execute(query, binds)
     rescue ActiveRecord::StatementInvalid => e
-      Rails.logger.error("Error running #{query}")
       Rails.logger.error("#{e.class}: #{e.message}")
     end
   end
