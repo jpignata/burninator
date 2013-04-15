@@ -27,6 +27,11 @@ will run them onto the standby database.
 Since you're standby is seeing some percentage of real production query
 traffic, its caches should keep warm and ready for failover.
 
+## Requirements
+
+* Rails application (only tested with 3.2.12)
+* Redis
+
 ## Installation
 
 ### Heroku
