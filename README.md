@@ -29,7 +29,7 @@ traffic, its caches should keep warm and ready for failover.
 
 ## Requirements
 
-* Rails application (only tested with 3.2.12)
+* Rails application (only tested against 3.2.12)
 * Redis
 
 ## Installation
