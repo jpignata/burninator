@@ -43,12 +43,15 @@ In your Gemfile:
 gem "burninator"
 ```
 
-In an initializer:
+In an initializer -- `config/initializers/burninator.rb`:
 
 ```ruby
 burninator = Burninator.new(redis: $redis, percentage: 25)
 burninator.broadcast
 ```
+
+If you leave off the `redis` parameter, it will create a new connection
+using what's configured in the environment as `REDIS_URL`.
 
 In your Procfile:
 
