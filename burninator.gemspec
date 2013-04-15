@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "burninator"
-  s.version     = "0.5.1"
+  s.version     = "0.5.2"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["John Pignata"]
   s.email       = ["john@pignata.com"]
