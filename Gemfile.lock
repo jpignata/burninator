@@ -1,10 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    metaclass (0.0.1)
+    mocha (0.13.3)
+      metaclass (~> 0.0.1)
     redis (3.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  redis
+  mocha
+  redis (~> 3.0.3)

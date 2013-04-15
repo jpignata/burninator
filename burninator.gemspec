@@ -1,15 +1,17 @@
 Gem::Specification.new do |s|
   s.name        = "burninator"
-  s.version     = "0.0.1"
+  s.version     = "0.1.0"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["John Pignata"]
   s.email       = ["john@pignata.com"]
   s.homepage    = "http://github.com/jpignata/burninator"
-  s.summary     = "Run queries to a Rails application on your standby databases"
-  s.description = "Uses a pub/sub channel for broadcasting SELECT queries for replay onto follower databases"
+  s.summary     = "Keep your follower database warm"
+  s.description = "Plays SELECT queries to your Rails application on a follower database to keep its caches warm."
   s.license     = "MIT"
 
-  s.add_development_dependency "rspec", "~> 2.13.0"
+  s.add_dependency "rails", ">= 3.2.0"
+  s.add_dependency "rspec", "~> 3.0.3"
+  s.add_development_dependency "mocha", "~> 0.13.3"
 
   s.files        = Dir.glob("{lib}/**/*") + %w(README.md LICENSE)
   s.require_path = "lib"
