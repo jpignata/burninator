@@ -44,4 +44,14 @@ class TestBroadcaster < MiniTest::Unit::TestCase
 
     ActiveSupport::Notifications.publish("sql.active_record", 0, 0, 1, payload)
   end
+
+  def test_doesnt_publish_locking_selects
+    payload = {
+      :sql => "SELECT * FROM posts FOR UPDATE"
+    }
+
+    @redis.expects(:publish).never
+
+    ActiveSupport::Notifications.publish("sql.active_record", 0, 0, 1, payload)
+  end
 end
