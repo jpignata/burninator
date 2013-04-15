@@ -18,11 +18,9 @@ caches are cold you're likely in for a rough time until its SQL and page
 caches warm up.
 
 Burninator uses a Redis pub/sub channel to broadcast some percentage of
-query traffic (by default 5%) from Rails application servers to a central
+query traffic from Rails application servers to a central
 warming process that will run queries against the follower. It uses the
-ActiveSupport notifications instrumentation API to listen for queries. These
-queries are broadcast through the channel to the warming process which
-will run them onto the standby database.
+ActiveSupport notifications instrumentation API to listen for queries.
 
 Since you're standby is seeing some percentage of real production query
 traffic, its caches should keep warm and ready for failover.
@@ -57,6 +55,8 @@ burninator.broadcast
 
 If you leave off the `redis` parameter, it will create a new connection
 using what's configured in the environment as `REDIS_URL`.
+
+`percentage` will default to 5%.
 
 #### Add the process in your Procfile:
 
