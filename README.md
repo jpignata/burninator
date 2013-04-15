@@ -30,6 +30,12 @@ traffic, its caches should keep warm and ready for failover.
 
 Assuming you're using Heroku:
 
+Set your warm target in the environment:
+
+```sh
+$ heroku config:add WARM_TARGET_URL="postgres://..."
+```
+
 In your Gemfile:
 
 ```ruby
@@ -52,7 +58,6 @@ burninator: rake burninator:warm
 Deploy and start burninating:
 
 ```sh
-$ heroku config:add WARM_TARGET_URL="postgres://..."
 $ heroku scale burninator=1
 ```
 
