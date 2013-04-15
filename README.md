@@ -22,7 +22,7 @@ query traffic from Rails application servers to a central
 warming process that will run queries against the follower. It uses the
 ActiveSupport notifications instrumentation API to listen for queries.
 
-Since you're standby is seeing some percentage of real production query
+Since your standby is seeing some percentage of real production query
 traffic, its caches should keep warm and ready for failover.
 
 ## Requirements
