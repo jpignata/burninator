@@ -3,18 +3,18 @@ require "burninator"
 
 class TestBurninator < MiniTest::Unit::TestCase
   def test_channel_generation
-    with_env("WARM_TARGET_URL" => "postgres://localhost/burninator") do
+    with_env("WARM_TARGET_URL" => "sqlite3://burninator") do
       burninator = Burninator.new
-      assert_equal "burninator:7649dd6b111e9845eea647853499be62c4aad6d0", burninator.channel
+      assert_equal "burninator:c05899490094dd737566110749f2ca145e5bcb45", burninator.channel
     end
   end
 
   def test_creates_connection
     redis = stub(:subscribe)
 
-    Burninator::Connection.expects(:new).with("postgres://localhost/burninator")
+    Burninator::Connection.expects(:new).with("sqlite3://burninator")
 
-    with_env("WARM_TARGET_URL" => "postgres://localhost/burninator") do
+    with_env("WARM_TARGET_URL" => "sqlite3://burninator") do
       burninator = Burninator.new(:redis => redis)
       burninator.warm
     end
@@ -25,7 +25,7 @@ class TestBurninator < MiniTest::Unit::TestCase
 
     Redis.expects(:new).never
 
-    with_env("WARM_TARGET_URL" => "postgres://localhost/burninator") do
+    with_env("WARM_TARGET_URL" => "sqlite3://burninator") do
       burninator = Burninator.new(:redis => redis)
       burninator.warm
     end
@@ -33,7 +33,7 @@ class TestBurninator < MiniTest::Unit::TestCase
 
   def test_creates_new_redis_if_not_passed_in
     env = {
-      "WARM_TARGET_URL" => "postgres://localhost/burninator",
+      "WARM_TARGET_URL" => "sqlite3://burninator",
       "REDIS_URL" => "redis://localhost/0"
     }
 
@@ -49,7 +49,7 @@ class TestBurninator < MiniTest::Unit::TestCase
   def test_raises_if_redis_url_missing_and_redis_not_passed
     ENV.delete("REDIS_URL")
 
-    with_env("WARM_TARGET_URL" => "postgres://localhost/burninator") do
+    with_env("WARM_TARGET_URL" => "sqlite3://burninator") do
       assert_raises(ArgumentError) do
         Burninator.new.warm
       end
