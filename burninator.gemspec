@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "burninator"
-  s.version     = "0.5.0"
+  s.version     = "0.5.1"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["John Pignata"]
   s.email       = ["john@pignata.com"]
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.add_dependency "rails", ">= 3.2.0"
-  s.add_dependency "rspec", "~> 3.0.3"
+  s.add_dependency "redis", "~> 3.0.3"
   s.add_development_dependency "mocha", "~> 0.13.3"
 
   s.files        = Dir.glob("{lib}/**/*") + %w(README.md LICENSE)
