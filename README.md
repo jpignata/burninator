@@ -13,8 +13,8 @@ Warm a standby database with some percentage of real production query traffic.
 
 It's common for Heroku customers to have a standby database follower in the
 event of a primary failure, however if you cutover to that follower and its
-caches are cold you're likely in for a bad day until its SQL and page caches
-warm.
+caches are cold you're likely in for a rough time until its SQL and page
+caches warm up.
 
 Burninator uses a Redis pub/sub channel to broadcast some percentage of
 query traffic (by default 5%) from Rails application servers to a central
