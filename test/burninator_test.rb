@@ -50,7 +50,7 @@ class TestBurninator < MiniTest::Unit::TestCase
     ENV.delete("REDIS_URL")
 
     with_env("WARM_TARGET_URL" => "sqlite3://burninator") do
-      assert_raises(ArgumentError) do
+      assert_raises(Burninator::EnvironmentError) do
         Burninator.new.warm
       end
     end
@@ -61,7 +61,7 @@ class TestBurninator < MiniTest::Unit::TestCase
 
     redis = stub(:subscribe)
 
-    assert_raises(ArgumentError) do
+    assert_raises(Burninator::EnvironmentError) do
       Burninator.new(:redis => redis).warm
     end
   end

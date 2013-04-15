@@ -6,6 +6,8 @@ require "burninator/tasks"
 class Burninator
   DEFAULT_PERCENTAGE = 5
 
+  EnvironmentError = Class.new(ArgumentError)
+
   def initialize(options = {})
     @redis = options[:redis]
     @percentage = options.fetch(:percentage, DEFAULT_PERCENTAGE)
@@ -47,14 +49,14 @@ class Burninator
   def warm_target_url
     ENV.fetch("WARM_TARGET_URL")
   rescue KeyError
-    raise ArgumentError,
+    raise EnvironmentError,
       "To use burninator, set WARM_TARGET_URL in your environment. See https://github.com/jpignata/burninator for more details."
   end
 
   def redis_url
     ENV.fetch("REDIS_URL")
   rescue KeyError
-    raise ArgumentError,
+    raise EnvironmentError,
       "To use burninator, set REDIS_URL in your environment. See https://github.com/jpignata/burninator for more details."
   end
 end
