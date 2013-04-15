@@ -29,21 +29,21 @@ traffic, its caches should keep warm and ready for failover.
 
 ## Installation
 
-Assuming you're using Heroku:
+### Heroku
 
-Set your warm target in the environment:
+#### Set your warm target in the environment
 
 ```sh
 $ heroku config:add WARM_TARGET_URL="postgres://..."
 ```
 
-In your Gemfile:
+#### Add the gem in your Gemfile
 
 ```ruby
 gem "burninator"
 ```
 
-In an initializer -- `config/initializers/burninator.rb`:
+#### Add  `config/initializers/burninator.rb`
 
 ```ruby
 burninator = Burninator.new(redis: $redis, percentage: 25)
@@ -53,13 +53,13 @@ burninator.broadcast
 If you leave off the `redis` parameter, it will create a new connection
 using what's configured in the environment as `REDIS_URL`.
 
-In your Procfile:
+#### Add the process in your Procfile:
 
 ```ruby
 burninator: rake burninator:warm
 ```
 
-Deploy and start burninating:
+#### Deploy and start burninating
 
 ```sh
 $ heroku scale burninator=1
