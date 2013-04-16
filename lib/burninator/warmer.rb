@@ -7,6 +7,8 @@ class Burninator
     end
 
     def run
+      trap_signals
+
       @redis.subscribe(@channel) do |on|
         on.message do |_, serialized|
           event = Marshal.load(serialized)
@@ -16,6 +18,11 @@ class Burninator
     end
 
     private
+
+    def trap_signals
+      trap(:INT) { abort }
+      trap(:TERM) { abort }
+    end
 
     def process(event)
       query = event[:sql].squish

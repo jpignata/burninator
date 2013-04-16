@@ -13,8 +13,6 @@ class Burninator
   end
 
   def warm
-    trap_signals
-
     Burninator::Warmer.new(redis, channel, database).run
   end
 
@@ -32,11 +30,6 @@ class Burninator
   end
 
   private
-
-  def trap_signals
-    trap(:INT) { abort }
-    trap(:TERM) { abort }
-  end
 
   def redis
     @redis ||= Redis.new(url: redis_url)
