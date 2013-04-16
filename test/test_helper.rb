@@ -4,10 +4,24 @@ require "minitest/autorun"
 require "mocha/setup"
 
 module Rails
+  @log = []
+
   class Railtie
     def self.rake_tasks
       yield
     end
+  end
+
+  def self.logger
+    self
+  end
+
+  def self.error(message)
+    @log << message
+  end
+
+  def self.log
+    @log
   end
 end
 
