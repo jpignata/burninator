@@ -8,8 +8,8 @@ class TestBroadcaster < MiniTest::Unit::TestCase
     percentage = 100
 
     @broadcaster = Burninator::Broadcaster.new(@redis, channel,
-      :percentage => percentage,
-      :ignore => /blogs/
+      percentage: percentage,
+      ignore: /blogs/
     )
     @broadcaster.run
   end
@@ -20,7 +20,7 @@ class TestBroadcaster < MiniTest::Unit::TestCase
 
   def test_publishes_selects
     payload = {
-      :sql => "SELECT 1"
+      sql: "SELECT 1"
     }
 
     @redis.expects(:publish).with("abc123", Marshal.dump(payload))
@@ -30,7 +30,7 @@ class TestBroadcaster < MiniTest::Unit::TestCase
 
   def test_doesnt_publish_inserts
     payload = {
-      :sql => "INSERT INTO posts (title) VALUES('title')"
+      sql:  "INSERT INTO posts (title) VALUES('title')"
     }
 
     @redis.expects(:publish).never
@@ -40,7 +40,7 @@ class TestBroadcaster < MiniTest::Unit::TestCase
 
   def test_doesnt_publish_updates
     payload = {
-      :sql => "UPDATE posts SET title = 'title'"
+      sql:  "UPDATE posts SET title = 'title'"
     }
 
     @redis.expects(:publish).never
@@ -50,7 +50,7 @@ class TestBroadcaster < MiniTest::Unit::TestCase
 
   def test_doesnt_publish_for_update_selects
     payload = {
-      :sql => "SELECT * FROM posts FOR UPDATE"
+      sql:  "SELECT * FROM posts FOR UPDATE"
     }
 
     @redis.expects(:publish).never
@@ -60,7 +60,7 @@ class TestBroadcaster < MiniTest::Unit::TestCase
 
   def test_doesnt_publish_for_share_selects
     payload = {
-      :sql => "SELECT * FROM posts FOR SHARE"
+      sql:  "SELECT * FROM posts FOR SHARE"
     }
 
     @redis.expects(:publish).never
@@ -70,7 +70,7 @@ class TestBroadcaster < MiniTest::Unit::TestCase
 
   def test_doesnt_publish_ignored_strings
     payload = {
-      :sql => "SELECT * FROM blogs"
+      sql:  "SELECT * FROM blogs"
     }
 
     @redis.expects(:publish).never

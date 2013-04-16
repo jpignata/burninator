@@ -39,7 +39,7 @@ class TestBurninator < MiniTest::Unit::TestCase
 
     redis = stub(:subscribe)
 
-    Redis.expects(:new).with(:url => "redis://localhost/0").returns(redis)
+    Redis.expects(:new).with(url: "redis://localhost/0").returns(redis)
 
     with_env(env) do
       Burninator.new.warm
@@ -62,7 +62,7 @@ class TestBurninator < MiniTest::Unit::TestCase
     redis = stub(:subscribe)
 
     assert_raises(Burninator::EnvironmentError) do
-      Burninator.new(:redis => redis).warm
+      Burninator.new(redis).warm
     end
   end
 end

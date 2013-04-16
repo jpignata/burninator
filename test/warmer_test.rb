@@ -29,12 +29,12 @@ class TestWarmer < MiniTest::Unit::TestCase
 
   def test_executes_received_query
     query = "SELECT * FROM posts WHERE id = $1"
-    column = OpenStruct.new(:name => "id")
+    column = OpenStruct.new(name: "id")
     binds = [column, 1]
 
     payload = {
-      :sql => query,
-      :binds => binds
+      sql: query,
+      binds: binds
     }
 
     @connection.expects(:execute).with(query, binds)

@@ -23,8 +23,8 @@ class Burninator
     ignore = options[:ignore]
 
     broadcaster = Burninator::Broadcaster.new(redis, channel,
-      :ignore => ignore,
-      :percentage => percentage
+      ignore: ignore,
+      percentage: percentage
     )
 
     broadcaster.run
@@ -42,7 +42,7 @@ class Burninator
   end
 
   def redis
-    @redis ||= Redis.new(:url => redis_url)
+    @redis ||= Redis.new(url: redis_url)
   end
 
   def database

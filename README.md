@@ -28,6 +28,7 @@ traffic, its caches should keep warm and ready for failover.
 ## Requirements
 
 * Rails application (only tested against 3.2.12)
+* Ruby 1.9+
 * Redis
 
 ## Installation
@@ -50,7 +51,7 @@ gem "burninator"
 
 ```ruby
 burninator = Burninator.new($redis)
-burninator.broadcast(:percentage => 25)
+burninator.broadcast(percentage: 25)
 ```
 
 If you leave off the `redis` parameter, it will create a new connection
