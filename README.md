@@ -59,7 +59,7 @@ using what's configured in the environment as `REDIS_URL`.
 
 `percentage` will default to 5%.
 
-If either WARM_TARGET_URL is missing or REDIS_URL is missing and a `redis`
+If either `WARM_TARGET_URL` is missing or `REDIS_URL` is missing and a `redis`
 parameter is not provided, a `Burninator::EnvironmentError` will be raised.
 
 #### Add the process in your Procfile:
