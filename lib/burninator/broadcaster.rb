@@ -7,10 +7,11 @@ class Burninator
   class Broadcaster
     KEY = "sql.active_record"
 
-    def initialize(redis, channel, percentage)
+    def initialize(redis, channel, options = {})
       @redis = redis
       @channel = channel
-      @percentage = percentage
+      @percentage = options.fetch(:percentage)
+      @ignore = options.fetch(:ignore)
     end
 
     def run
@@ -33,6 +34,7 @@ class Burninator
     def publish?(sql)
       return false unless sql =~ /\Aselect /i
       return false if sql =~ / for (update|share)\z/i
+      return false if sql =~ @ignore if @ignore
 
       SecureRandom.random_number(100 / @percentage) == 0
     end

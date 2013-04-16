@@ -15,7 +15,7 @@ class TestBurninator < MiniTest::Unit::TestCase
     Burninator::Connection.expects(:new).with("sqlite3://burninator")
 
     with_env("WARM_TARGET_URL" => "sqlite3://burninator") do
-      burninator = Burninator.new(:redis => redis)
+      burninator = Burninator.new(redis)
       burninator.warm
     end
   end
@@ -26,7 +26,7 @@ class TestBurninator < MiniTest::Unit::TestCase
     Redis.expects(:new).never
 
     with_env("WARM_TARGET_URL" => "sqlite3://burninator") do
-      burninator = Burninator.new(:redis => redis)
+      burninator = Burninator.new(redis)
       burninator.warm
     end
   end

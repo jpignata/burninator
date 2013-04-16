@@ -8,9 +8,8 @@ class Burninator
 
   EnvironmentError = Class.new(ArgumentError)
 
-  def initialize(options = {})
-    @redis = options[:redis]
-    @percentage = options.fetch(:percentage, DEFAULT_PERCENTAGE)
+  def initialize(redis = nil)
+    @redis = redis
   end
 
   def warm
@@ -19,8 +18,16 @@ class Burninator
     Burninator::Warmer.new(redis, channel, database).run
   end
 
-  def broadcast
-    Burninator::Broadcaster.new(redis, channel, @percentage).run
+  def broadcast(options = {})
+    percentage = options.fetch(:percentage, DEFAULT_PERCENTAGE)
+    ignore = options[:ignore]
+
+    broadcaster = Burninator::Broadcaster.new(redis, channel,
+      :ignore => ignore,
+      :percentage => percentage
+    )
+
+    broadcaster.run
   end
 
   def channel
