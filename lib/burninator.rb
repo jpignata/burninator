@@ -19,12 +19,9 @@ class Burninator
   end
 
   def broadcast(options = {})
-    percentage = options.fetch(:percentage, DEFAULT_PERCENTAGE)
-    ignore = options[:ignore]
-
     broadcaster = Burninator::Broadcaster.new(redis, channel,
-      ignore: ignore,
-      percentage: percentage
+      percentage: options.fetch(:percentage, DEFAULT_PERCENTAGE),
+      ignore: options[:ignore]
     )
 
     broadcaster.run
