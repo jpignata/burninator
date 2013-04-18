@@ -34,7 +34,7 @@ class Burninator
     def publish?(sql)
       return false unless sql =~ /\Aselect /i
       return false if sql =~ / for (update|share)\z/i
-      return false if sql =~ @ignore if @ignore
+      return false if sql =~ @ignore
 
       SecureRandom.random_number(100 / @percentage) == 0
     end
