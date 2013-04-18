@@ -8,18 +8,7 @@ class Burninator
 
     def run
       trap_signals
-
-      begin
-        @redis.subscribe(@channel) do |on|
-          on.message do |_, serialized|
-            event = Marshal.load(serialized)
-            process(event)
-          end
-        end
-      rescue Errno::ECONNRESET
-        Rails.logger.error("Redis connection reset; resubscribing...")
-        retry
-      end
+      subscribe
     end
 
     private
@@ -27,6 +16,18 @@ class Burninator
     def trap_signals
       trap(:INT) { abort }
       trap(:TERM) { abort }
+    end
+
+    def subscribe
+      @redis.subscribe(@channel) do |on|
+        on.message do |_, serialized|
+          event = Marshal.load(serialized)
+          process(event)
+        end
+      end
+    rescue Errno::ECONNRESET
+      Rails.logger.error("Redis connection reset; resubscribing...")
+      retry
     end
 
     def process(event)
