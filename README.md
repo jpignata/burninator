@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/jpignata/burninator.png)](https://travis-ci.org/jpignata/burninator)
 [![Gem Version](https://badge.fury.io/rb/burninator.png)](http://badge.fury.io/rb/burninator)
 
-### Status: Beta (Caveat Utilitor)
+### Status: Stable
 
 ## Summary
 
@@ -54,13 +54,17 @@ burninator = Burninator.new($redis)
 burninator.broadcast(percentage: 25)
 ```
 
-If you leave off the `redis` parameter, it will create a new connection
+* If you leave off the `redis` parameter, it will create a new connection
 using what's configured in the environment as `REDIS_URL`.
 
-`percentage` will default to 5%.
+* `percentage` will default to 5%.
 
-If either `WARM_TARGET_URL` is missing or `REDIS_URL` is missing and a `redis`
+* If either `WARM_TARGET_URL` is missing or `REDIS_URL` is missing and a `redis`
 parameter is not provided, a `Burninator::EnvironmentError` will be raised.
+
+* `broadcast` takes an additional parameter `ignore` which expects a regular
+expression. Queries which match this regular expression will not be replayed
+against the standby database.
 
 #### Add the process in your Procfile:
 
